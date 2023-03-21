@@ -20,7 +20,6 @@ class swap_two_numbers {
         int b=sc.nextInt();
         List<Integer> arr=get(a,b);
         System.out.println("The swapped array is :"+arr);
-
     }
 
 }
