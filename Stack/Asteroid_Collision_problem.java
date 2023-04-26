@@ -46,3 +46,20 @@ class Asteroid_Collision_problem {
         a.printArray(result);
     }
 }
+
+// public int[] asteroidCollision(int[] asteroids) {
+  
+//     int[] stack=new int[asteroids.length];
+//     int last=0;
+//     for(int i=0;i<asteroids.length;i++) {
+//         int a=asteroids[i];
+//         if(a>0) stack[last++]=a;
+//         else {
+//             while(last>0&&stack[last-1]>0&&stack[last-1]<-a) last--;
+//             if(last==0||stack[last-1]<0) stack[last++]=a;
+//             else if(stack[last-1]==-a) last--;
+//         }
+//     }
+//     return  Arrays.copyOf(stack,last);
+
+// }
