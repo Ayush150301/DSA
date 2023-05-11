@@ -149,8 +149,8 @@ class dequeue {
         System.out.println("5 is already in the deque");
 
 
-        System.out.println("The front of the deque ==>"+obj.getFront());
-        System.out.println("The rear of the deque ==>"+obj.getRear());
+        System.out.println("The front of the deque ==> "+obj.getFront());
+        System.out.println("The rear of the deque ==> "+obj.getRear());
 
 
         if(obj.isFull())
