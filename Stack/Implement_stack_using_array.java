@@ -1,9 +1,11 @@
-class MyStack
+import java.util.*;
+
+class Implement_stack_using_array
 {
     int top;
 	int arr[] = new int[1000];
 
-    MyStack()
+    Implement_stack_using_array()
 	{
 		top = -1;
 	}
