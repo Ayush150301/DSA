@@ -75,6 +75,29 @@
         inorder(root.right);
     }
 
+# INORDER TRAVERSAL(LNR) using iterative way 
+
+    public List<Integer> iterativeInorderTraversal(Node root, List<Integer> res) {
+        if (root == null)
+            return res;
+        Stack<Node> st = new Stack<>();
+        Node node = root;
+        while (true) {
+            if (node != null) {
+                st.push(node);
+                node = node.left;
+            } else {
+                if (st.isEmpty()) {
+                    break;
+                }
+                node = st.pop();
+                res.add(node.data);
+                node = node.right;
+            }
+        }
+        return res;
+    }
+
 # PREORDER TRAVERSAL(NLR)
 
     public void preorder(Node root) {  
@@ -86,6 +109,25 @@
         preorder(root.right);
     }
 
+# PREORDER TRAVERSAL(NLR) using iterative way --> 
+
+    public List<Integer> iterativepreorderTraversal(Node root, List<Integer> res) {
+        if (root == null)
+            return res;
+        Stack<Node> st = new Stack<>();
+        st.push(root);
+        while (!st.isEmpty()) {
+            root = st.pop();
+            res.add(root.data);
+            if (root.right != null) {
+                st.push(root.right);
+            }
+            if (root.left != null) {
+                st.push(root.left);
+            }
+        }
+        return res;
+    }
 # POSTORDER TRAVERSAL(LRN)
 
     public void postorder(Node root) { 

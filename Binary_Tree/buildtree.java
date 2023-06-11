@@ -63,6 +63,47 @@ class buildtree {
         }
     }
 
+    // Iterative way of Preorder Traversal
+    public List<Integer> iterativepreorderTraversal(Node root, List<Integer> res) {
+        if (root == null)
+            return res;
+        Stack<Node> st = new Stack<>();
+        st.push(root);
+        while (!st.isEmpty()) {
+            root = st.pop();
+            res.add(root.data);
+            if (root.right != null) {
+                st.push(root.right);
+            }
+            if (root.left != null) {
+                st.push(root.left);
+            }
+        }
+        return res;
+    }
+
+    // Iterative way of Inorder Traversal
+    public List<Integer> iterativeInorderTraversal(Node root, List<Integer> res) {
+        if (root == null)
+            return res;
+        Stack<Node> st = new Stack<>();
+        Node node = root;
+        while (true) {
+            if (node != null) {
+                st.push(node);
+                node = node.left;
+            } else {
+                if (st.isEmpty()) {
+                    break;
+                }
+                node = st.pop();
+                res.add(node.data);
+                node = node.right;
+            }
+        }
+        return res;
+    }
+
     public void inorder(Node root) { // LNR
         if (root == null) {
             return;
@@ -123,27 +164,37 @@ class buildtree {
         Node root = null;
         Node n;
         // creating a tree
-        // root = tree.build(tree.root);
+        root = tree.build(tree.root);
 
         // Input -->> 1 3 7 -1 -1 11 -1 -1 5 17 -1 -1 -1
         // level Order
-        System.out.println("Enter the data in level order format --> ");
-        n = tree.buildfromlevelorder(root);
+        // System.out.println("Enter the data in level order format --> ");
+        // n = tree.buildfromlevelorder(root);
 
         System.out.println("Printing the level order traversal output --> ");
-        tree.levelordertraversal(n);
+        tree.levelordertraversal(root);
 
-        root = n;
+        // root = n;
 
         // Inorder
         System.out.println("Printing the inorder traversal --> ");
         tree.inorder(root);
         System.out.println();
 
+        System.out.println("Printing the inorder traversal using iterative way --> ");
+        List<Integer> res1 = new ArrayList<>();
+        res1=tree.iterativeInorderTraversal(root, res1);
+        System.out.println(res1);
+
         // Preorder
         System.out.println("Printing the preorder traversal --> ");
         tree.preorder(root);
         System.out.println();
+
+        System.out.println("Printing the preorder using iterative way --> ");
+        List<Integer> res = new ArrayList<>();
+        res = tree.iterativepreorderTraversal(root, res);
+        System.out.println(res);
 
         // PostOrder
         System.out.println("Printing the postorder traversal --> ");
