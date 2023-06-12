@@ -138,3 +138,55 @@
         postorder(root.right);
         System.out.print(root.data + " ");
     }
+
+# POSTORDER TRAVERSAL(LRN) using iterative way using 2  stacks --> 
+
+    public List<Integer> iterativePostorderTraversal(Node root, List<Integer> res) { // using two stacks
+        Stack<Node> st1 = new Stack<>();
+        Stack<Node> st2 = new Stack<>();
+        if (root == null)
+            return res;
+        st1.push(root);
+        while (!st1.isEmpty()) {
+            Node node = st1.pop();
+            st2.push(node);
+            if (node.left != null)
+                st1.push(node.left);
+            if (node.right != null)
+                st1.push(node.right);
+        }
+        while (!st2.isEmpty()) {
+            res.add(st2.pop().data);
+        }
+        return res;
+    }
+
+# POSTORDER TRAVERSAL(LRN) using iterative way using 1 stacks --> 
+
+    public List<Integer> iterativePostorderTraversal2(Node root, List<Integer> res) {
+        Stack<Node> st = new Stack<>();
+        if (root == null)
+            return res;
+        Node curr = root;
+        Node temp;
+        while (!st.isEmpty() || curr != null) {
+            if (curr != null) {
+                st.push(curr);
+                curr = curr.left;
+            } else {
+                temp = st.peek().right;
+                if (temp == null) {
+                    temp = st.peek();
+                    st.pop();
+                    res.add(temp.data);
+                    while (!st.isEmpty() && temp == st.peek().right) {
+                        temp = st.peek();
+                        st.pop();
+                        res.add(temp.data);
+                    }
+                } else
+                    curr = temp;
+            }
+        }
+        return res;
+    }

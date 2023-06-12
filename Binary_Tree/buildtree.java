@@ -104,6 +104,56 @@ class buildtree {
         return res;
     }
 
+    // Iterative way of Postorder Traversal using two stacks
+    public List<Integer> iterativePostorderTraversal(Node root, List<Integer> res) { // using two stacks
+        Stack<Node> st1 = new Stack<>();
+        Stack<Node> st2 = new Stack<>();
+        if (root == null)
+            return res;
+        st1.push(root);
+        while (!st1.isEmpty()) {
+            Node node = st1.pop();
+            st2.push(node);
+            if (node.left != null)
+                st1.push(node.left);
+            if (node.right != null)
+                st1.push(node.right);
+        }
+        while (!st2.isEmpty()) {
+            res.add(st2.pop().data);
+        }
+        return res;
+    }
+
+    // Iterative way of Postorder Traversal using one stack
+    public List<Integer> iterativePostorderTraversal2(Node root, List<Integer> res) {
+        Stack<Node> st = new Stack<>();
+        if (root == null)
+            return res;
+        Node curr = root;
+        Node temp;
+        while (!st.isEmpty() || curr != null) {
+            if (curr != null) {
+                st.push(curr);
+                curr = curr.left;
+            } else {
+                temp = st.peek().right;
+                if (temp == null) {
+                    temp = st.peek();
+                    st.pop();
+                    res.add(temp.data);
+                    while (!st.isEmpty() && temp == st.peek().right) {
+                        temp = st.peek();
+                        st.pop();
+                        res.add(temp.data);
+                    }
+                } else
+                    curr = temp;
+            }
+        }
+        return res;
+    }
+
     public void inorder(Node root) { // LNR
         if (root == null) {
             return;
@@ -183,7 +233,7 @@ class buildtree {
 
         System.out.println("Printing the inorder traversal using iterative way --> ");
         List<Integer> res1 = new ArrayList<>();
-        res1=tree.iterativeInorderTraversal(root, res1);
+        res1 = tree.iterativeInorderTraversal(root, res1);
         System.out.println(res1);
 
         // Preorder
@@ -201,5 +251,14 @@ class buildtree {
         tree.postorder(root);
         System.out.println();
 
+        System.out.println("Printing the postorder using iterative way using 2 stacks  --> ");
+        List<Integer> res3 = new ArrayList<>();
+        res3 = tree.iterativePostorderTraversal(root, res3);
+        System.out.println(res3);
+
+        System.out.println("Printing the postorder using iterative way using 1 stacks  --> ");
+        List<Integer> res4 = new ArrayList<>();
+        res4 = tree.iterativePostorderTraversal2(root, res4);
+        System.out.println(res4);
     }
 }
