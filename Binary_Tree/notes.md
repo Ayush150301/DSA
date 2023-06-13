@@ -229,3 +229,38 @@
             }
         }
     }
+
+
+# HEIGHT OF A BINARY TREE
+
+    public int maxDepth(TreeNode root)
+    {
+        if(root==null)
+        {
+            return 0;
+        }
+        int l=maxDepth(root.left);
+        int r=maxDepth(root.right);
+
+        return Math.max(l,r)+1;
+    }
+
+# CHECK IS IT A BALANCED TREE OR NOT
+
+    public int dfsHeight (TreeNode root) {
+        if (root == null) return 0;
+        
+        int leftHeight = dfsHeight (root.left);
+        if (leftHeight == -1) return -1;
+        int rightHeight = dfsHeight (root.right);
+        if (rightHeight == -1) return -1;
+        
+        if (Math.abs(leftHeight - rightHeight) > 1)  return -1;
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+    public boolean isBalanced(TreeNode root) {
+        // if (Math.abs(levelordertraversal(root.left) - levelordertraversal(root.right)) > 1)
+        //     return false;
+        // return true;
+        return (dfsHeight(root)!=-1);
+    }
