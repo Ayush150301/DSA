@@ -6,20 +6,28 @@ class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
+
+    TreeNode() {
+    }
+
+    TreeNode(int val) {
+        this.val = val;
+    }
+
     TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
         this.right = right;
     }
 }
+
 public class Maximum_Depth_of_Binary_Tree {
 
+    // method 1 ->
     public int levelordertraversal(TreeNode root) {
-        int count=0;
-        if(root==null)
-        return 0;
+        int count = 0;
+        if (root == null)
+            return 0;
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         q.add(null);
@@ -43,7 +51,18 @@ public class Maximum_Depth_of_Binary_Tree {
                 }
             }
         }
-        return count+1;
+        return count + 1;
+    }
+
+    // method 2 -> recursive way
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int l = maxDepth(root.left);
+        int r = maxDepth(root.right);
+
+        return Math.max(l, r) + 1;
     }
 
     public TreeNode build(TreeNode root) {
@@ -61,11 +80,11 @@ public class Maximum_Depth_of_Binary_Tree {
         root.right = build(root.right);
         return root;
     }
-    public static void main(String Args[])
-    {
+
+    public static void main(String Args[]) {
         Maximum_Depth_of_Binary_Tree tree = new Maximum_Depth_of_Binary_Tree();
-        TreeNode root=null;
-        root=tree.build(root);
-        System.out.println("The maximum depth of the binary tree is "+tree.levelordertraversal(root));
+        TreeNode root = null;
+        root = tree.build(root);
+        System.out.println("The maximum depth of the binary tree is " + tree.maxDepth(root));
     }
 }
