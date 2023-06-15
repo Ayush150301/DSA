@@ -264,3 +264,23 @@
         // return true;
         return (dfsHeight(root)!=-1);
     }
+
+# DIAMETER OF A TREE
+
+    int find(TreeNode root, int[] diameter) // pass by reference in java by passing the array of size of one
+    {
+        if (root == null)
+            return 0;
+
+        int lh = find(root.left, diameter);
+        int rh = find(root.right, diameter);
+        diameter[0] = Math.max(diameter[0], lh + rh);
+        return 1 + Math.max(lh, rh);
+
+    }
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        int[] diameter = new int[1];
+        find(root, diameter);
+        return diameter[0];
+    }
