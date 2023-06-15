@@ -20,22 +20,24 @@ class TreeNode {
 }
 
 class Diameter_of_Binary_Tree {
-    int find(TreeNode root,int[] diameter) // pass by reference in java by passing the array of size of one
+    int find(TreeNode root, int[] diameter) // pass by reference in java by passing the array of size of one
     {
-        if(root==null)
-        return 0;
+        if (root == null)
+            return 0;
 
-        int lh=find(root.left,diameter);
-        int rh=find(root.right,diameter);
-        diameter[0]=Math.max(diameter[0],lh+rh);
-        return 1+Math.max(lh,rh);
+        int lh = find(root.left, diameter);
+        int rh = find(root.right, diameter);
+        diameter[0] = Math.max(diameter[0], lh + rh);
+        return 1 + Math.max(lh, rh);
 
     }
+
     public int diameterOfBinaryTree(TreeNode root) {
-        int[] diameter=new int[1];
-        find(root,diameter);
+        int[] diameter = new int[1];
+        find(root, diameter);
         return diameter[0];
     }
+
     public TreeNode build(TreeNode root) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the data -->");
@@ -51,11 +53,12 @@ class Diameter_of_Binary_Tree {
         root.right = build(root.right);
         return root;
     }
+
     public static void main(String Args[]) {
         Diameter_of_Binary_Tree tree = new Diameter_of_Binary_Tree();
         TreeNode root = null;
         root = tree.build(root);
-        System.out.println("The maximum depth of the binary tree is " + tree.diameterOfBinaryTree(root));
+        System.out.println("The Diameter of the binary tree is " + tree.diameterOfBinaryTree(root));
     }
-    
+
 }

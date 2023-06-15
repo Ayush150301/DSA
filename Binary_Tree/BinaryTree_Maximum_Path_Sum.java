@@ -57,6 +57,6 @@ public class BinaryTree_Maximum_Path_Sum {
         BinaryTree_Maximum_Path_Sum tree = new BinaryTree_Maximum_Path_Sum();
         TreeNode root = null;
         root = tree.build(root);
-        System.out.println("The maximum depth of the binary tree is " + tree.maxPathSum(root));
+        System.out.println("The maximum path of the binary tree is " + tree.maxPathSum(root));
     }
 }
