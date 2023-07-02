@@ -1,22 +1,23 @@
 import java.util.Scanner;
 
-class TreeNode {
+class Node {
     int val;
-    TreeNode left;
-    TreeNode right;
+    Node left;
+    Node right;
 
-    TreeNode(int x) {
+    Node(int x) {
         val = x;
     }
 }
 
 public class LCA {
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null || root == p || root == q)
+    public Node lca(Node root, int n1,int n2)
+	{
+		if (root == null || root.val == n1 || root.val == n2)
             return root;
 
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        Node left = lca(root.left, n1, n2);
+        Node right = lca(root.right, n1, n2);
 
         // result
         if (left == null)
@@ -28,13 +29,13 @@ public class LCA {
         else { // both left and right are not null , we found our result
             return root;
         }
-    }
+	}
 
-    public TreeNode build(TreeNode root) {
+    public Node build(Node root) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the data -->");
         int data = sc.nextInt();
-        root = new TreeNode(data);
+        root = new Node(data);
 
         if (data == -1) {
             return null;
@@ -49,14 +50,14 @@ public class LCA {
     public static void main(String Args[]) {
         Scanner sc = new Scanner(System.in);
         LCA tree = new LCA();
-        TreeNode root = null;
+        Node root = null;
         root = tree.build(root);
         System.out.println("Enter the first node whose lca you want to find : ");
-        // int x = sc.nextInt();
-        TreeNode p = new TreeNode(sc.nextInt());
+        int x = sc.nextInt();
+        // Node p = new Node(sc.nextInt());
         System.out.println("Enter the second node whose lca you want to find : ");
-        // int y = sc.nextInt();
-        TreeNode q = new TreeNode(sc.nextInt());
-        System.out.println("The Lowest Common Ancestor of the binary tree is " + tree.lowestCommonAncestor(root, p, q).val);
+        int y = sc.nextInt();
+        // Node q = new Node(sc.nextInt());
+        System.out.println("The Lowest Common Ancestor of the binary tree is " + tree.lca(root, x, y).val);
     }
 }
