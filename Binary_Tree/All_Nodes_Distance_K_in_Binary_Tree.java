@@ -7,19 +7,19 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
-class TreeNode {
+class Node {
     int val;
-    TreeNode left;
-    TreeNode right;
+    Node left;
+    Node right;
 
-    TreeNode() {
+    Node() {
     }
 
-    TreeNode(int val) {
+    Node(int val) {
         this.val = val;
     }
 
-    TreeNode(int val, TreeNode left, TreeNode right) {
+    Node(int val, Node left, Node right) {
         this.val = val;
         this.left = left;
         this.right = right;
@@ -28,9 +28,9 @@ class TreeNode {
 
 class Pair {
     int num;
-    TreeNode node;
+    Node node;
 
-    Pair(int _num, TreeNode _node) {
+    Pair(int _num, Node _node) {
         num = _num;
         node = _node;
     }
@@ -45,11 +45,11 @@ Self Notes
  */
 
 public class All_Nodes_Distance_K_in_Binary_Tree {
-    private void markParents(TreeNode root, Map<TreeNode, TreeNode> parent_track, TreeNode target) {
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+    private void markParents(Node root, Map<Node, Node> parent_track, Node target) {
+        Queue<Node> queue = new LinkedList<Node>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            TreeNode current = queue.poll();
+            Node current = queue.poll();
             if (current.left != null) {
                 parent_track.put(current.left, current);
                 queue.offer(current.left);
@@ -61,11 +61,11 @@ public class All_Nodes_Distance_K_in_Binary_Tree {
         }
     }
 
-    public ArrayList<Integer> distanceK(TreeNode root, TreeNode target, int k) {
-        Map<TreeNode, TreeNode> parent_track = new HashMap<>();
+    public ArrayList<Integer> distanceK(Node root, Node target, int k) {
+        Map<Node, Node> parent_track = new HashMap<>();
         markParents(root, parent_track, target);
-        Map<TreeNode, Boolean> visited = new HashMap<>();
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Map<Node, Boolean> visited = new HashMap<>();
+        Queue<Node> queue = new LinkedList<Node>();
         queue.offer(target);
         visited.put(target, true);
         int curr_level = 0;
@@ -75,7 +75,7 @@ public class All_Nodes_Distance_K_in_Binary_Tree {
                 break;
             curr_level++;
             for (int i = 0; i < size; i++) {
-                TreeNode current = queue.poll();
+                Node current = queue.poll();
                 if (current.left != null && visited.get(current.left) == null) {
                     queue.offer(current.left);
                     visited.put(current.left, true);
@@ -92,17 +92,17 @@ public class All_Nodes_Distance_K_in_Binary_Tree {
         }
         ArrayList<Integer> result = new ArrayList<>();
         while (!queue.isEmpty()) {
-            TreeNode current = queue.poll();
+            Node current = queue.poll();
             result.add(current.val);
         }
         return result;
     }
 
-    public TreeNode build(TreeNode root) {
+    public Node build(Node root) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the data -->");
         int data = sc.nextInt();
-        root = new TreeNode(data);
+        root = new Node(data);
 
         if (data == -1) {
             return null;
@@ -117,10 +117,10 @@ public class All_Nodes_Distance_K_in_Binary_Tree {
     public static void main(String Args[]) {
         Scanner sc = new Scanner(System.in);
         All_Nodes_Distance_K_in_Binary_Tree tree = new All_Nodes_Distance_K_in_Binary_Tree();
-        TreeNode root = null;
+        Node root = null;
         root = tree.build(root);
         System.out.println("Enter the target node value -->");
-        TreeNode target = new TreeNode(sc.nextInt());
+        Node target = new Node(sc.nextInt());
         System.out.println("Enter the distance --> ");
         int k = sc.nextInt();
         ArrayList<Integer> res=new ArrayList<>();

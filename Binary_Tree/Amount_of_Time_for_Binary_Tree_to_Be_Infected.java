@@ -54,7 +54,7 @@ public class Amount_of_Time_for_Binary_Tree_to_Be_Infected {
 
         Queue<TreeNode> q = new LinkedList<>();
         q.add(origin);
-        
+
         HashSet<TreeNode> visited = new HashSet<>();
 
         while (q.size() > 0) {
@@ -98,7 +98,7 @@ public class Amount_of_Time_for_Binary_Tree_to_Be_Infected {
         Amount_of_Time_for_Binary_Tree_to_Be_Infected tree = new Amount_of_Time_for_Binary_Tree_to_Be_Infected();
         TreeNode root = null;
         root = tree.build(root);
-        System.out.println("Enter the value of Infected Node -->");
+        System.out.println("Enter the value of Infected TreeNode -->");
         int start = sc.nextInt();
         System.out.println("The Amount of Time for Binary Tree to Be Infected is " + tree.amountOfTime(root, start));
     }

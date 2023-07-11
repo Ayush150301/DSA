@@ -22,7 +22,7 @@ public class Top_View_of_Binary_Tree {
         }
         Map<Integer,Integer> map=new TreeMap<>();
         Queue<Pair> queue=new LinkedList<Pair>();
-        queue.add(new Pair(root, 0));
+        queue.add(new Pair());
         while(!queue.isEmpty()){
             Pair p=queue.remove();
             int hd=p.num;
