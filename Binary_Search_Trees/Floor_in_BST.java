@@ -2,56 +2,33 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Node {
+class TreeNode {
     int val;
-    Node left;
-    Node right;
+    TreeNode left;
+    TreeNode right;
 
-    Node() {
+    TreeNode() {
     }
 
-    Node(int val) {
+    TreeNode(int val) {
         this.val = val;
     }
 
-    Node(int val, Node left, Node right) {
+    TreeNode(int val, TreeNode left, TreeNode right) {
         this.val = val;
         this.left = left;
         this.right = right;
     }
 }
+public class Floor_in_BST {
+    public void levelordertraversal(TreeNode root) {
 
-public class Ceil_from_BST {
-    int findCeil(Node root, int key) {
-        if (root == null) return -1;
-        int ceil=-1;
-        while(root!=null)
-        {
-            if(key==root.val)
-            {
-                ceil=root.val;
-                return ceil;
-            }
-            if(key>root.val)
-            {
-                root=root.right;
-            }
-            else{
-                ceil=root.val;
-                root=root.left;
-            }
-        }
-        return ceil;
-    }
-
-    public void levelordertraversal(Node root) {
-
-        Queue<Node> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
         q.add(null);
 
         while (!q.isEmpty()) {
-            Node temp = q.peek();
+            TreeNode temp = q.peek();
             q.remove();
 
             if (temp == null) {
@@ -71,9 +48,32 @@ public class Ceil_from_BST {
         }
     }
 
-    public Node insertinBST(Node root, int data) {
+    public int floor(TreeNode root, int x) {
+        if(root==null) return -1;
+        int floor=-1;
+        while(root!=null)
+        {
+            if(x==root.val)
+            {
+                floor=root.val;
+                return floor;
+            }
+            if(x<root.val)
+            {
+                root=root.left;
+            }
+            else
+            {
+                floor=root.val;
+                root=root.right;
+            }
+        }
+        return floor;
+    }
+
+    public TreeNode insertinBST(TreeNode root, int data) {
         if (root == null) {
-            root = new Node(data);
+            root = new TreeNode(data);
             return root;
         }
         if (data < root.val) {
@@ -86,8 +86,8 @@ public class Ceil_from_BST {
 
     public static void main(String Args[]) {
         Scanner sc = new Scanner(System.in);
-        Ceil_from_BST tree = new Ceil_from_BST();
-        Node root = null;
+        Floor_in_BST tree = new Floor_in_BST();
+        TreeNode root = null;
         int data;
         System.out.println("Enter the root node --> ");
         data = sc.nextInt();
@@ -96,10 +96,8 @@ public class Ceil_from_BST {
             System.out.print("\n Enter next element (-1 to exit):-");
             data = sc.nextInt();
         }
-        System.out.println("Enter the value -> ");
-        int value=sc.nextInt();
-        int val=tree.findCeil(root,value);
-        System.out.println("The Ceil value of the Binary Search Tree --> " +val);
-
+        System.out.println("Enter the value --> ");
+        int val=sc.nextInt();
+        System.out.println("The floor value of the Binary Search Tree --> "+tree.floor(root,val));
     }
 }
