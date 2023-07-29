@@ -90,6 +90,7 @@ public class Ninja {
             for (int last = 0; last < 4; last++) {
                 temp[last] = 0;
                 for (int task = 0; task < 3; task++) {
+                    if(task!=last)
                     temp[last] = Math.max(temp[last], points[day][task] + prev[task]);
                 }
             }
